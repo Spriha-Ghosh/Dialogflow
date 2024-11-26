@@ -1,0 +1,13 @@
+Speaker ID: leverage biometric voice identification to identify and verify users Not Supported
+End-to-end management: take care of all your agent management needs inside Dialogflow Basics(Y) Experiments and virtual agent evaluation(N)
+Testing: evaluate the quality of your agents to uncover bugs and prevent regressions Create and manage test cases for continuous evaluation(N) Standard Simualator(Y)
+Flow-based modules: manage your agents easily and work on independent flows simultaneously Shared intents and training phrases across flows subagents(N)
+Native IVR settings: optimize for Contact Center AI deployments Supports settings such as DTMF, live agent handoff, barge-in, speech timeouts(N)
+Supplemental questions: handle deviations in conversations, then gracefully return to the main flow (N)
+State-based models: switch between topics and manage complex flows with ease Reuse intents and intuitively define transitions and data conditions(N) Flat Data model for simple use cases(Y)
+Visual flow builder: quickly see, understand, edit, and share work with interactive flow visualizations     Form based bot builder(Y)
+Advanced AI: take advantage of best machine learning models developed by Google Research State-of-the-art BERT-based natural language understanding (NLU) models(N)   Cutting-edge speech recognition and speech synthesis models (Y)
+Prebuilt agents: accelerate time to production with a library of agents prepared for common use cases production ready agents(N) template agents(Y)
+Omnichannel integration: build once, deploy across your contact center and digital channels   Integration into popular channels, such as Google Assistant, Slack, Twitter, 
+One-click telephony integration
+Analytics: gain insights into agent performance and customer engagements Performance dashboards Data export to custom dashboards State based visualization(N)
