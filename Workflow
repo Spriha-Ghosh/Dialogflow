@@ -1,0 +1,2 @@
+Select the part of the training phrase that you want to annotate.-->Select the desired entity type from the list.
+A parameter is created for you in the parameter table below. --> Click the Save button and wait until the Agent Training dialog indicates that training is complete.
