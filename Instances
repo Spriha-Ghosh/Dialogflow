@@ -49,3 +49,73 @@
 49. PayE-Challan  
 50. UpdateEmergencyContact  
 
+Here are additional intent labels based on the vehicle and permit services you've mentioned:
+
+### **Vehicle Services**
+1. TransferVehicleOwnership  
+2. RequestDuplicateRC  
+3. ChangeAddressInRC  
+4. AddHypothecation  
+5. TerminateHypothecation  
+6. ContinueHypothecation  
+7. ApplyForNOC  
+8. CheckRCParticulars  
+9. RetainRegistrationNumber  
+10. UpdateHypothecationDetails  
+11. RequestHypothecationRelease  
+12. TransferVehicleOwnershipInDeathCase  
+13. RequestTemporaryRC  
+14. UpdateVehicleOwnership  
+15. ViewVehicleRCStatus  
+16. UpdateRCDetails  
+17. ApplyForNOCForVehicleExport  
+18. RequestVehicleNoObjectionCertificate  
+19. ReportRCStatus  
+20. ChangeVehicleClassification
+
+### **Permit Services**
+21. ApplyForAITP  
+22. TransferPermit  
+23. TransferPermitInDeathCase  
+24. RenewPermit  
+25. RenewHomeAuthorization  
+26. ApplyForFreshPermit  
+27. RequestDuplicatePermit  
+28. SurrenderPermit  
+29. ApplyForBharatNumber  
+30. RequestDMS  
+31. ApplyForRTOPermit  
+32. TransferPermitOwnership  
+33. VerifyPermitValidity  
+34. ApplyForTransportPermit  
+35. ApplyForSpecialPermit  
+36. RequestPermitExtension  
+37. ViewPermitDetails  
+38. RequestPermitCancellation  
+39. RequestPermitModification  
+40. SurrenderPermitInCaseOfVehicleSale  
+41. CheckPermitStatus  
+42. ApplyForPermitRenewalWithPenalty  
+43. ApplyForTemporaryTransportPermit  
+44. VerifyHomeAuthorization  
+45. RequestHomeAuthorizationModification  
+
+### **Additional Tax and Certification Services**
+46. PayRCOrRoadTax  
+47. RequestPUCCertificate  
+48. RenewPUCCertificate  
+49. CheckPUCCertificateStatus  
+50. VerifyPUCValidity  
+51. RequestTaxExemptionOnPermit  
+52. ApplyForBharatTaxNumber  
+53. RequestDMSForRC  
+54. VerifyBharatNumberApplication  
+55. CheckTaxPaymentStatus  
+56. VerifyRTOTaxCompliance  
+57. RequestTaxRefund  
+58. ApplyForTransportTax  
+59. UpdateTaxDetails  
+60. RequestTaxCertificate  
+
+
+
