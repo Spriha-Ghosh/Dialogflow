@@ -5,3 +5,5 @@ End User Expression(raw) --> Agent --> Intent Match(best intent in your agent) -
 training phrase(example phrases, which dialogflow ML builds upon for similar phrases) actions(trigger certain actions defined in system.) 
 parameters(struvtured data with entity types) responses(text, speech, or visual) -->More complex intents; contexts(helps in more accurate intent matching) events(invoke an intent based on something that has happened, instead of what an end-user communicates.) 
 Copy Overwrite move -->destination agent
+A follow-up intent is a child of its associated parent intent. In other words, follow-up intents refer to the previous intents or parent intent to continue the chatbot 
+conversation. It is used to repeat an event or request more information about the event. Follow-up intent is a type of context.
