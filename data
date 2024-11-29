@@ -1,0 +1,1098 @@
+assistant_utils.py
+
+### Code Breakdown
+
+This Python script processes Natural Language Understanding (NLU) data, focusing on preparing and converting datasets for tasks such as intent recognition and slot filling. Here's a breakdown:
+
+---
+
+#### **Imports**
+- **`os`**: For file and directory manipulation.
+- **`re`**: For regular expression operations.
+- **`shutil`**: For high-level file operations like copying directories.
+- **`nemo.collections.nlp.data.datasets.datasets_utils.data_preprocessing`**:
+  - **`DATABASE_EXISTS_TMP`**: Likely a predefined message template for logging purposes.
+  - **`if_exist`**: Checks if specific files exist in a directory.
+  - **`write_files`**: Writes lists to files, utility for saving data.
+
+---
+
+#### **Functions**
+
+1. **`copy_input_files(infold)`**  
+   Copies training and testing datasets to a new directory structure for easier processing.  
+   - **Parameters**:
+     - `infold`: Input directory containing raw datasets.
+   - **Steps**:
+     - Checks if target directories (`trainset`, `testset`) exist in `infold/dataset`.
+     - If not, creates necessary directories and copies raw datasets from a predefined location (`CrossValidation/...`).
+
+---
+
+2. **`get_intents(infold)`**  
+   Extracts intent names from filenames in a directory.  
+   - **Parameters**:
+     - `infold`: Directory containing intent files (e.g., `intent1.csv`, `intent2.csv`).
+   - **Steps**:
+     - Reads all filenames in the directory, removes the `.csv` extension, and sorts the list.
+     - Returns the sorted list of intents.
+
+---
+
+3. **`get_intent_queries(infold, intent_names, mode)`**  
+   Associates each query (text input) with its corresponding intent label.  
+   - **Parameters**:
+     - `infold`: Directory containing intent files.
+     - `intent_names`: List of intent names.
+     - `mode`: Dataset type (`train` or `test`).
+   - **Steps**:
+     - For each intent, reads the corresponding file and processes queries.
+     - Extracts query phrases and assigns intent labels (indices).
+     - Returns a list of queries with labels.
+
+---
+
+4. **`get_slots(infold, modes)`**  
+   Identifies unique slot types in the dataset.  
+   - **Parameters**:
+     - `infold`: Directory containing data.
+     - `modes`: List of modes (`train`, `test`) to process.
+   - **Steps**:
+     - Iterates through files for each mode.
+     - Extracts slot annotations (e.g., `[slot : value]`) using regex.
+     - Returns a sorted list of unique slot names, appending "O" for "Outside" slots.
+
+---
+
+5. **`get_slot_queries(infold, slot_dict, mode, intent_names)`**  
+   Maps each word in a query to its corresponding slot label.  
+   - **Parameters**:
+     - `infold`: Input directory.
+     - `slot_dict`: Mapping of slot names to indices.
+     - `mode`: Dataset type (`train` or `test`).
+     - `intent_names`: List of intent names.
+   - **Steps**:
+     - Reads queries for each intent and maps words to slot indices.
+     - Handles transitions between slot boundaries (e.g., `[slot_name]` to normal words).
+     - Returns a list of slot-annotated queries.
+
+---
+
+6. **`process_assistant(infold, outfold, modes=['train', 'test'])`**  
+   Main function to process datasets for NLU tasks.  
+   - **Parameters**:
+     - `infold`: Input directory containing raw data.
+     - `outfold`: Output directory for processed data.
+     - `modes`: List of modes to process (`train`, `test`).
+   - **Steps**:
+     - Checks if processed files already exist using `if_exist`.
+     - Calls helper functions to:
+       - Copy and organize datasets.
+       - Extract intents and save them to `dict.intents.csv`.
+       - Process queries for intent labels and save to `{mode}.tsv`.
+       - Identify slot types and save to `dict.slots.csv`.
+       - Map words to slot labels and save to `{mode}_slots.tsv`.
+
+---
+
+#### **Key Points**
+1. **Intent Recognition**:
+   - Identifies the overall goal of a user's input (e.g., "Book a flight").
+2. **Slot Filling**:
+   - Extracts entities from input (e.g., "New York" → `[destination]`).
+3. **Data Organization**:
+   - Ensures datasets are structured consistently for downstream model training.
+4. **Dataset Dependency**:
+   - Relies on a specific dataset format (e.g., CSV files with semicolon-separated fields).
+
+This script prepares data for NLU systems, often used in chatbots or virtual assistants. The modular design allows for easy adjustments to accommodate new datasets or preprocessing requirements. 
+     -----------------------------
+     I'll provide a detailed breakdown of the code, explaining its purpose, functions, and key components:
+
+# Purpose of the Script
+This Python script is designed to process a dataset for a Natural Language Understanding (NLU) task, specifically handling assistant commands. It prepares data for intent classification and slot filling, which are crucial tasks in natural language processing.
+
+## Imported Modules
+```python
+import os      # For file and directory operations
+import re      # For regular expression operations
+import shutil  # For high-level file operations
+```
+
+## Key Functions Breakdown
+
+### 1. `copy_input_files(infold)`
+- Purpose: Copies input training files to a convenient location for data conversion
+- Key operations:
+  - Creates a dataset directory
+  - Checks if train and test sets already exist
+  - Copies files from a predefined old folder to a new location
+- Prevents unnecessary recopying of files
+
+### 2. `get_intents(infold)`
+- Purpose: Extracts intent names from filenames in the input folder
+- Operations:
+  - Lists files in the input folder
+  - Removes file extensions
+  - Sorts the intent names
+- Returns a sorted list of intent names
+
+### 3. `get_intent_queries(infold, intent_names, mode)`
+- Purpose: Extracts queries and their corresponding intent labels
+- Process:
+  - Reads CSV files for each intent
+  - Extracts specific query phrases
+  - Assigns a numeric intent label
+- Returns a list of queries with their intent labels
+
+### 4. `get_slots(infold, modes)`
+- Purpose: Identifies unique slot types in the dataset
+- Operations:
+  - Searches through training and testing data
+  - Uses regular expressions to find slot phrases
+  - Extracts unique slot types
+- Returns a sorted list of slot types, with "O" (outside) added at the end
+
+### 5. `get_slot_queries(infold, slot_dict, mode, intent_names)`
+- Purpose: Converts words in queries to their corresponding slot numbers
+- Process:
+  - Reads queries for each intent
+  - Identifies and assigns slot numbers to words
+  - Handles slot transitions
+- Returns a list of queries with slot numbers
+
+### 6. `process_assistant(infold, outfold, modes=['train', 'test'])`
+- Main processing function that ties everything together
+- Steps:
+  1. Check if output files already exist
+  2. Create output directory
+  3. Copy input files
+  4. Get intent names and write to dictionary
+  5. Generate intent queries for train and test sets
+  6. Get slot types and write to dictionary
+  7. Generate slot queries for train and test sets
+
+## Key Data Processing Concepts
+- Intent Classification: Assigning a label to each query
+- Slot Filling: Identifying and labeling specific parts of a query
+- Uses a numeric representation for intents and slots
+- Supports both train and test modes
+
+## Unique Features
+- Uses a single slot type notation (no B-, I- prefixes)
+- Handles multi-domain intents (mentioned in comment)
+- Flexible processing for different dataset structures
+
+## Commented-Out Logging
+The script has several commented-out logging statements, suggesting it was part of a larger NLP framework (likely NVIDIA NeMo) that uses custom logging.
+
+## Potential Use Cases
+- Training natural language understanding models
+- Preprocessing data for intent recognition systems
+- Preparing datasets for machine learning in conversational AI
+
+The script is particularly useful for researchers and developers working on:
+- Voice assistants
+- Chatbots
+- Natural language interface systems
+
+dialogflow_convertdata.py
+
+     I'll provide a detailed breakdown of this Python script for processing various Natural Language Understanding (NLU) datasets:
+
+## Overall Purpose
+This script is designed to convert different NLU datasets into a standardized format, likely for use with the NVIDIA NeMo framework. It supports processing multiple datasets like ATIS, SNIPS, Jarvis, and Dialogflow.
+
+## Key Imported Modules
+```python
+import argparse   # For parsing command-line arguments
+import os         # File and directory operations
+import shutil     # High-level file operations
+from os.path import exists  # Path existence checking
+```
+
+## Main Processing Functions
+
+### 1. `ids2text(ids, vocab)`
+- Converts numeric IDs to text using a vocabulary dictionary
+- Joins words from a vocabulary based on input IDs
+
+### 2. `process_atis(infold, outfold, modes=['train', 'test'], do_lower_case=False)`
+- Processes the ATIS (Air Travel Information System) dataset
+- Steps:
+  - Loads vocabulary
+  - Checks if output files exist
+  - Creates output files for different modes (train/test)
+  - Converts numeric IDs to text sentences
+  - Optional lowercase conversion
+  - Writes intent and slot information to files
+
+### 3. `process_snips(infold, outfold, do_lower_case, modes=['train', 'test'], dev_split=0.1)`
+- Processes the SNIPS dataset for different domains
+- Handles multiple dataset types:
+  - Light (smart lights)
+  - Speak (smart speaker)
+  - All (combined dataset)
+- Features:
+  - Checks dataset existence
+  - Creates train/dev splits
+  - Supports lowercase conversion
+  - Combines datasets if needed
+
+### 4. `process_jarvis_datasets(infold, outfold, modes=['train', 'test', 'dev'], do_lower_case=False, ignore_prev_intent=False)`
+- Most comprehensive dataset processing function
+- Detailed processing of intent and slot information
+- Key operations:
+  - Handles multiple modes (train/test/dev)
+  - Creates intent and slot dictionaries
+  - Supports BIO (Beginning, Inside, Outside) tagging
+  - Optional lowercase conversion
+  - Can ignore previous intent tokens
+
+## Command-Line Interface
+The script provides a robust CLI for dataset processing:
+
+```python
+parser.add_argument("--dataset_name", required=True,
+    choices=['atis', 'snips', 'jarvis', 'dialogflow', 'mturk-processed', 'assistant'])
+parser.add_argument("--source_data_dir", required=True)
+parser.add_argument("--target_data_dir", required=True)
+parser.add_argument("--do_lower_case", action='store_true')
+parser.add_argument("--ignore_prev_intent", action='store_true')
+parser.add_argument("--use_full_dataset", action='store_true')
+```
+
+## Main Execution Block
+The `__main__` section:
+- Parses command-line arguments
+- Validates source directory
+- Calls appropriate processing function based on dataset name
+
+## Notable Features
+- Flexible dataset processing
+- Support for multiple NLU datasets
+- Standardization of data formats
+- Optional text preprocessing (lowercase)
+- Detailed error handling
+
+## Commented-Out Sections
+Several import and processing functions are commented out, suggesting:
+- Work in progress
+- Optional dataset processing
+- Flexibility in dataset handling
+
+## Potential Use Cases
+- Natural Language Understanding (NLU) research
+- Training machine learning models for:
+  - Intent classification
+  - Slot filling
+  - Voice assistant development
+
+## Limitations/Considerations
+- Requires specific input data formats
+- Assumes certain file structures for each dataset
+- Primarily designed for NVIDIA NeMo framework
+
+## Usage Example
+```bash
+python script.py --dataset_name snips \
+                 --source_data_dir /path/to/snips/data \
+                 --target_data_dir /path/to/output \
+                 --do_lower_case
+```
+
+This script is a powerful tool for researchers and developers working on natural language processing tasks, providing a standardized approach to preparing various NLU datasets.
+
+ -------------------------------------
+
+This script processes multiple datasets into NeMo's BIO format, which is widely used for tasks involving natural language understanding (NLU). Here’s a detailed breakdown of the code:
+
+---
+
+### **Imports**
+- **`argparse`**: Parses command-line arguments.
+- **`os`, `shutil`**: Manages file and directory operations.
+- **`os.path.exists`**: Checks if a file or directory exists.
+
+### **Utility Functions**
+1. **`ids2text(ids, vocab)`**:
+   - Converts a sequence of IDs into a string of tokens using a vocabulary (`vocab`).
+   - Example: Transforms numerical IDs from datasets into human-readable sentences.
+
+---
+
+### **Dataset Processing Functions**
+
+#### 1. **`process_atis()`**
+   - Processes the **ATIS dataset**, a well-known dataset for intent classification and slot-filling.
+   - Workflow:
+     1. **Load Vocabulary**: Reads a vocabulary file.
+     2. **Check if Dataset Exists**: If processed files already exist, skips processing.
+     3. **Iterate over Modes**:
+        - For each mode (`train`, `test`, etc.):
+          - Read query, intent, and slot files.
+          - Convert queries to text and write to `.tsv` files (e.g., `sentence\tintent_label`).
+          - Write slot annotations to `_slots.tsv`.
+     4. **Copy Supporting Files**: Copies intent and slot dictionaries to the target directory.
+
+---
+
+#### 2. **`process_snips()`**
+   - Handles the **SNIPS dataset**, another dataset for intent and slot-filling tasks.
+   - Features:
+     - Splits the data into `train`, `test`, and optionally `dev`.
+     - Processes multiple dataset versions (e.g., "light", "speak").
+   - Workflow:
+     1. Verifies dataset presence and skips processing if already done.
+     2. Processes subsets like "light" and "speak".
+     3. Combines datasets into an "all" version.
+
+---
+
+#### 3. **`process_jarvis_datasets()`**
+   - Processes **Jarvis datasets** into NeMo's BIO format.
+   - Features:
+     - Handles multi-mode (`train`, `test`, `dev`) datasets.
+     - Handles both intents and slot tags, including BIO format.
+     - Supports case normalization and ignoring previous intents.
+   - Workflow:
+     1. Checks for processed files and skips if they exist.
+     2. For each mode:
+        - Reads queries, intents, and slots.
+        - Maps intents to numerical IDs and slots to BIO-format tags.
+        - Writes processed sentences and slot annotations.
+
+---
+
+### **Main Functionality**
+- **Command-Line Arguments**:
+  - **`--dataset_name`**: Dataset to process (e.g., `atis`, `snips`).
+  - **`--source_data_dir`**: Directory of raw dataset files.
+  - **`--target_data_dir`**: Directory to save processed files.
+  - **`--do_lower_case`**: Optional flag to convert text to lowercase.
+  - **`--ignore_prev_intent`**: For Jarvis datasets, skips intent history during processing.
+
+- **Dataset Processing Dispatch**:
+  - Based on the dataset name (`args.dataset_name`), the appropriate processing function is invoked.
+
+---
+
+### **Code Workflow**
+1. Parse command-line arguments.
+2. Verify the source directory exists.
+3. Call the relevant dataset processing function:
+   - **`process_atis`** for ATIS.
+   - **`process_snips`** for SNIPS.
+   - **`process_jarvis_datasets`** for Jarvis datasets.
+   - **`process_dialogflow`** for Dialogflow datasets.
+4. If an unsupported dataset is passed, raise an error.
+
+---
+
+### **Key Features**
+1. **Extensibility**:
+   - Supports additional datasets like Dialogflow and MTurk by defining their processing functions.
+2. **Standardized Outputs**:
+   - Creates consistent `.tsv` and dictionary files for easy use with downstream tasks.
+3. **Custom Options**:
+   - Options like `do_lower_case` and `ignore_prev_intent` allow for dataset-specific tweaks.
+
+---
+
+### **Example Usage**
+```bash
+python script.py --dataset_name atis \
+                 --source_data_dir ./raw_data/atis \
+                 --target_data_dir ./processed_data/atis \
+                 --do_lower_case
+```
+This command processes the ATIS dataset from `./raw_data/atis`, converts all text to lowercase, and saves the output in `./processed_data/atis`.
+
+---
+
+### **Key Concepts**
+- **BIO Format**: Common format for tagging tokens as **B**eginning, **I**nside, or **O**utside named entities.
+- **Intent Classification**: Identifying the intent behind a user's input (e.g., "book flight").
+- **Slot Filling**: Extracting entities from text (e.g., "Boston" as a `departure_city`).
+
+This script is modular, extensible, and geared towards preparing NLU datasets for NeMo-based pipelines.
+
+----
+
+Sure! Let me expand on each part of the code to provide a more comprehensive understanding of its components and functionality. This way, you'll have a clearer picture of how the script works and what each section does.
+
+---
+
+### **Purpose of the Script**
+The script is designed to preprocess various natural language understanding (NLU) datasets into a specific format compatible with **NeMo**, NVIDIA's AI development toolkit. It handles datasets like ATIS, SNIPS, Jarvis, and others, converting them into a consistent format for tasks such as intent classification and slot-filling.
+
+---
+
+### **1. Imports and Their Roles**
+
+#### **General Libraries**
+```python
+import argparse
+import os
+import shutil
+from os.path import exists
+```
+- **`argparse`**: Handles command-line arguments to make the script flexible and reusable.
+- **`os` & `shutil`**: Provides tools to interact with the file system:
+  - Create directories (`os.makedirs()`).
+  - Check for file existence (`os.path.exists()`).
+  - Copy files (`shutil.copyfile()`).
+
+#### **Domain-Specific Imports**
+```python
+from nemo.utils import logging
+from nemo.collections.nlp.data.data_utils import(
+    DATABASE_EXISTS_TMP,
+    MODE_EXISTS_TMP,
+    create_dataset,
+    get_dataset,
+    if_exist,
+    get_vocab,
+)
+```
+- **`logging`**: Provides structured logging messages for debugging and progress tracking.
+- **NeMo utilities**:
+  - **`DATABASE_EXISTS_TMP` and `MODE_EXISTS_TMP`**: Template strings for log messages indicating dataset existence.
+  - **`create_dataset()`**: Utility to split, preprocess, and save datasets.
+  - **`get_dataset()`**: Reads and parses datasets, splitting them into train/dev/test subsets.
+  - **`if_exist()`**: Checks for the existence of required output files.
+  - **`get_vocab()`**: Loads a vocabulary file for token-ID mapping.
+
+---
+
+### **2. Utility Functions**
+
+#### **`ids2text`**
+```python
+def ids2text(ids, vocab):
+    return ' '.join([vocab[int(id_)] for id_ in ids])
+```
+- **Purpose**: Converts a sequence of numeric token IDs into a human-readable sentence using the vocabulary file.
+- **How It Works**:
+  1. Iterate over the list of token IDs (`ids`).
+  2. Use the vocabulary (`vocab`) to map each ID to its corresponding word.
+  3. Join the words with spaces to form a sentence.
+
+- **Example**:
+  - Input: `ids = [1, 4, 7]`, `vocab = {1: 'book', 4: 'a', 7: 'flight'}`
+  - Output: `"book a flight"`
+
+---
+
+### **3. Dataset-Specific Processing Functions**
+
+#### **a) `process_atis`**
+Processes the **Airline Travel Information System (ATIS)** dataset. This dataset includes:
+- Queries in the form of token IDs.
+- Intent labels (e.g., "BookFlight").
+- Slot tags for token-level annotations (e.g., "B-Destination").
+
+```python
+def process_atis(infold, outfold, modes=['train', 'test'], do_lower_case=False):
+```
+- **Steps**:
+  1. **Load Vocabulary**:
+     ```python
+     vocab = get_vocab(f'{infold}/atis.dict.vocab.csv')
+     ```
+     Load a CSV file mapping token IDs to words.
+  
+  2. **Check Output Existence**:
+     ```python
+     if if_exist(outfold, [f'{mode}.tsv' for mode in modes]):
+         logging.info(DATABASE_EXISTS_TMP.format('ATIS', outfold))
+         return outfold
+     ```
+     Skip processing if the required `.tsv` files already exist in the output folder.
+
+  3. **Process Queries**:
+     For each mode (`train`, `test`):
+     - Convert token IDs into sentences.
+     - Match sentences with their intent labels and slot tags.
+     - Save this data in `.tsv` format.
+
+  4. **Copy Metadata**:
+     ```python
+     shutil.copyfile(f'{infold}/atis.dict.intent.csv', f'{outfold}/dict.intents.csv')
+     ```
+     Copy intent and slot mappings to the output folder.
+
+- **Output Files**:
+  - `train.tsv` and `test.tsv`: Processed queries with labels.
+  - `train_slots.tsv` and `test_slots.tsv`: Slot tags for queries.
+
+---
+
+#### **b) `process_snips`**
+Handles the **SNIPS dataset**, which is structured differently (JSON files).
+
+```python
+def process_snips(infold, outfold, do_lower_case, modes=['train', 'test'], dev_split=0.1):
+```
+- **Purpose**: Processes SNIPS datasets from JSON format into `.tsv` files.
+
+- **Steps**:
+  1. **Validation**:
+     ```python
+     if not os.path.exists(infold):
+         raise ValueError(f'Data not found at {infold}.')
+     ```
+     Ensures the input folder exists.
+
+  2. **Check Existing Outputs**:
+     ```python
+     exist = True
+     for dataset in ['light', 'speak', 'all']:
+         if if_exist(f'{outfold}/{dataset}', [f'{mode}.tsv' for mode in modes]):
+             ...
+     ```
+     If outputs exist for sub-domains (`light`, `speak`, and combined), skip processing.
+
+  3. **Processing Sub-Domains**:
+     - Use `get_dataset()` to parse the JSON files for training/testing datasets.
+     - Split training data into train/dev subsets using `dev_split`.
+
+  4. **Generate `.tsv` Files**:
+     Call `create_dataset()` for each processed dataset:
+     - **Light**: Processes data from a specific sub-domain.
+     - **Speak**: Processes data from another sub-domain.
+     - **All**: Combines the above datasets.
+
+---
+
+#### **c) `process_jarvis_datasets`**
+Converts datasets into the **BIO format**, used for slot tagging tasks.
+
+```python
+def process_jarvis_datasets(infold, outfold, modes=['train', 'test', 'dev'], do_lower_case=False, ignore_prev_intent=False):
+```
+- **Purpose**: Processes and standardizes datasets into the format required by NVIDIA's Jarvis model.
+
+- **Key Features**:
+  - Supports BIO tagging for slot annotations:
+    - `B-<slot>`: Beginning of a slot.
+    - `I-<slot>`: Inside a slot.
+    - `O`: Outside any slot.
+
+- **Steps**:
+  1. **Create Slot and Intent Mappings**:
+     ```python
+     intents_list = {}
+     slots_list = {}
+     slots_list_all = {'O': 0}
+     ```
+     Build mappings for intents and slots dynamically while processing queries.
+
+  2. **Process Sentences and Tags**:
+     ```python
+     if len(line_splits) == 3:
+         intent_str, slot_tags_str, sentence = line_splits
+     ```
+     Parse each query line into its components (intent, slots, sentence).
+
+  3. **Handle BIO Tagging**:
+     ```python
+     slots.extend([str(slots_list_all['O'])] * len(words_list))
+     ```
+     Add BIO tags for each token in the sentence.
+
+  4. **Save Outputs**:
+     Write processed data to `.tsv` files for train, test, and dev subsets.
+
+---
+
+### **4. Main Script Logic**
+The script uses `argparse` to accept command-line arguments for specifying dataset type, input/output directories, and processing options.
+
+```python
+if __name__ == "__main__":
+```
+- Parses arguments and validates inputs:
+  ```python
+  parser.add_argument("--dataset_name", required=True, type=str, ...)
+  if not exists(source_dir):
+      raise FileNotFoundError(f"{source_dir} does not exist.")
+  ```
+
+- Calls the appropriate dataset-specific function based on the `dataset_name` argument:
+  ```python
+  if dataset_name == 'atis':
+      process_atis(infold=source_dir, outfold=target_dir, do_lower_case=args.do_lower_case)
+  ```
+
+---
+
+### **How to Run the Script**
+- Command-line Example:
+  ```bash
+  python preprocess_datasets.py \
+      --dataset_name atis \
+      --source_data_dir ./raw_data/atis \
+      --target_data_dir ./processed_data/atis \
+      --do_lower_case
+  ```
+  This processes the ATIS dataset with lowercased text.
+
+---
+
+### **Key Takeaways**
+- **Modularity**: Each dataset type has a dedicated processing function.
+- **Flexibility**: Command-line arguments make it reusable across datasets.
+- **Standardization**: Converts diverse datasets into NeMo-compatible `.tsv` files.
+- **Scalability**: Supports multiple datasets with minimal changes.
+
+ -----
+  CONFIGURATION
+
+  This configuration file describes a training pipeline for **Intent and Slot Classification** using pretrained **BERT models**. Let’s break it down into meaningful sections and explain how each part contributes to the overall process.
+
+---
+
+### **Overview**
+The goal of this setup is to use **transfer learning** with a pretrained BERT model to classify **intents** (sentence-level classification) and predict **slots** (token-level classification). This is typically applied in **Natural Language Understanding (NLU)** tasks, such as handling user queries in conversational AI systems.
+
+---
+
+### **Key Sections**
+
+#### **1. Trainer Configuration**
+The `trainer` section defines how the model will be trained using the PyTorch Lightning framework. Here's an explanation of each parameter:
+
+- **`gpus: 1`**: Specifies that training will run on 1 GPU. If set to `0`, training will run on the CPU.
+- **`num_nodes: 1`**: Runs training on one machine. For distributed training across multiple machines, you would increase this value.
+- **`max_epochs: 50`**: Training will continue for 50 epochs unless stopped earlier.
+- **`max_steps: null`**: Overrides `max_epochs` if specified. If set to a value, training stops after a certain number of steps.
+- **`accumulate_grad_batches: 1`**: Gradients will be accumulated every `k` batches before a backward pass. A value greater than 1 helps simulate larger batch sizes.
+- **`precision: 32`**: Training uses 32-bit precision by default. Set to `16` to enable mixed-precision training (faster and uses less memory).
+- **`accelerator: ddp`**: Uses **Distributed Data Parallel (DDP)** for multi-GPU training.
+- **`val_check_interval: 1.0`**: Validation will run once per epoch. You can set this to `0.25` for validation after every 25% of the epoch or an integer for every `n` steps.
+- **`resume_from_checkpoint: null`**: If specified, resumes training from a checkpoint, restoring the training state (e.g., epoch, optimizer).
+- **`checkpoint_callback: false`**: Disables automatic checkpointing by PyTorch Lightning (handled by `exp_manager`).
+- **`logger: false`**: Disables automatic logging (handled by `exp_manager`).
+
+---
+
+#### **2. Model Configuration**
+The `model` section defines the architecture, dataset, tokenizer, language model, and optimization settings.
+
+##### **a) Data and Label Files**
+- **`nemo_path`**: Path to save the final model in the `.nemo` format (NeMo-compatible).
+- **`data_dir`**: Directory containing the dataset. This includes training, validation, and test data.
+- **`intent_labels_file` & `slot_labels_file`**:
+  - These CSV files map intent and slot indices to their respective labels.
+  - Example for intents: `0,BookFlight`, `1,CancelReservation`.
+  - Example for slots: `0,O`, `1,B-Location`, `2,I-Location`.
+
+##### **b) Loss Balancing**
+- **`class_balancing: null`**: Option to apply class-balancing techniques (e.g., `weighted_loss`).
+- **`intent_loss_weight: 0.6`**: Weights the intent loss in the total loss calculation (intent contributes 60%, and slot loss contributes 40%).
+- **`pad_label: -1`**: Label for padding tokens. Slot predictions for these tokens are ignored during training.
+- **`ignore_extra_tokens: false`**: Decides whether to ignore special tokens like [PAD] or [SEP].
+- **`ignore_start_end: true`**: First and last tokens (typically [CLS] and [SEP]) are excluded from slot predictions.
+
+##### **c) Dataset Configurations**
+For train, validation, and test datasets:
+- **`prefix`**: Indicates the dataset file prefix (e.g., `train`, `test`).
+- **`batch_size`**: Size of mini-batches for training or evaluation (32 here).
+- **`shuffle`**: Whether to shuffle data during training.
+- **`num_workers`**: Number of data-loading threads.
+- **`drop_last`**: If `true`, drops the last batch if its size is smaller than `batch_size`.
+
+##### **d) Tokenizer**
+- **`tokenizer_name`**: Uses the tokenizer from the pretrained model (`bert-large-uncased`).
+- **`vocab_file`**: Path to a custom vocabulary file (if required).
+- **`tokenizer_model`**: Specifies a tokenizer model (e.g., SentencePiece) if not using the pretrained tokenizer.
+
+##### **e) Language Model**
+- **`max_seq_length: 50`**: Maximum sequence length for input sentences. Longer sentences are truncated.
+- **`pretrained_model_name`**: Name of the pretrained model (e.g., `bert-large-uncased`).
+
+##### **f) Output Head**
+- **`num_output_layers: 2`**: Number of dense layers in the classification head.
+- **`fc_dropout: 0.1`**: Dropout rate for the output head to prevent overfitting.
+
+---
+
+#### **3. Optimizer and Scheduler**
+The `optim` section defines the optimizer and learning rate scheduler for training.
+
+- **`name: adam`**: Uses the Adam optimizer.
+- **`lr: 2e-5`**: Learning rate for optimization.
+- **`weight_decay: 0.01`**: Regularization to prevent overfitting by penalizing large weights.
+
+- **Scheduler (`sched`)**:
+  - **`WarmupAnnealing`**: Starts with a small learning rate and gradually increases it during a warmup phase, then decays it.
+  - **`warmup_ratio: 0.1`**: Warmup phase lasts for 10% of the total training steps.
+
+---
+
+#### **4. Experiment Management (`exp_manager`)**
+The `exp_manager` section organizes and tracks the experiment.
+
+- **`exp_dir`**: Directory to save logs, checkpoints, and TensorBoard files.
+- **`name: IntentSlot`**: Name of the experiment.
+- **`create_tensorboard_logger: true`**: Enables TensorBoard logging for visualizing training metrics.
+- **`create_checkpoint_callback: true`**: Automatically saves model checkpoints at regular intervals.
+
+---
+
+#### **5. Hydra Configurations**
+The `hydra` section manages job-level configurations and logging.
+
+- **`run.dir`**: Specifies the working directory for the job.
+- **`job_logging.root.handlers: null`**: Disables Hydra’s default logging.
+
+---
+
+### **Workflow Summary**
+1. **Preprocessing**: Data (intents and slots) is prepared using the specified file structure.
+2. **Training**:
+   - The pretrained BERT model is fine-tuned for the dual tasks of intent classification and slot filling.
+   - Loss is computed using a weighted combination of intent and slot losses.
+   - Gradients are updated using the Adam optimizer with a warmup phase.
+3. **Evaluation**:
+   - The model is validated/tested using the provided test dataset.
+   - Predictions for intents and slots are logged for analysis.
+
+---
+
+### **Customization Points**
+- Adjust `max_seq_length` to accommodate longer inputs if needed.
+- Modify `batch_size`, `lr`, and `num_workers` based on hardware capabilities.
+- Use `resume_from_checkpoint` to continue training from a saved state.
+- Enable AMP (`precision: 16`) for faster mixed-precision training on GPUs.
+
+-------------------------------
+
+This script demonstrates the full lifecycle of training, evaluating, and testing a BERT-based **Intent and Slot Classification Model** using NVIDIA's **NeMo framework**. Let's break it down section by section.
+
+---
+
+### **Code Breakdown**
+
+#### **1. Imports**
+```python
+import pytorch_lightning as pl
+from omegaconf import DictConfig, OmegaConf
+from nemo.collections.nlp.models import IntentSlotClassificationModel
+from nemo.core.config import hydra_runner
+from nemo.utils import logging
+from nemo.utils.exp_manager import exp_manager
+```
+
+- **`pytorch_lightning as pl`**: Provides tools for handling model training, validation, and testing seamlessly.
+- **`DictConfig` & `OmegaConf`**: NeMo relies on `OmegaConf` for managing hierarchical configurations using YAML.
+- **`IntentSlotClassificationModel`**: A prebuilt NeMo model for Intent and Slot Classification tasks.
+- **`hydra_runner`**: A NeMo decorator for managing configuration files via **Hydra**.
+- **`exp_manager`**: A utility to manage experiment directories, logging, and checkpointing.
+
+---
+
+#### **2. Main Function with Hydra Configuration**
+```python
+@hydra_runner(config_path="conf", config_name="intent_slot_classification_config")
+def main(cfg: DictConfig) -> None:
+    logging.info(f'Config Params:\n {OmegaConf.to_yaml(cfg)}')
+```
+
+- **`@hydra_runner`**: Automatically loads the configuration from the file `conf/intent_slot_classification_config.yaml`. The config includes details like trainer setup, model parameters, data paths, and optimizer settings.
+- **`cfg: DictConfig`**: The parsed configuration is passed as a dictionary-like object.
+
+---
+
+#### **3. Trainer and Experiment Manager**
+```python
+trainer = pl.Trainer(**cfg.trainer)
+exp_manager(trainer, cfg.get("exp_manager", None))
+```
+
+- **`pl.Trainer(**cfg.trainer)`**: Initializes a PyTorch Lightning trainer using settings like the number of GPUs, epochs, gradient accumulation, and distributed training.
+- **`exp_manager`**: Manages logging and checkpointing. It uses `cfg.exp_manager` to create directories and log training results (e.g., TensorBoard logs).
+
+---
+
+#### **4. Model Initialization**
+```python
+model = IntentSlotClassificationModel(cfg.model, trainer=trainer)
+```
+
+- Initializes the **IntentSlotClassificationModel** using the provided configuration (`cfg.model`).
+- **Key model components**:
+  - A pretrained BERT model (`bert-large-uncased`).
+  - Output heads for intent classification and slot tagging.
+  - Loss weighting to balance intents and slots during training.
+
+---
+
+#### **5. Training**
+```python
+logging.info('Starting training...')
+trainer.fit(model)
+logging.info('Training finished!')
+```
+
+- **`trainer.fit(model)`**: Trains the model on the dataset specified in the configuration (`cfg.model.train_ds`).
+
+---
+
+#### **6. Testing**
+```python
+if trainer.fast_dev_run:
+    return
+```
+
+- **`fast_dev_run`**: If enabled, it runs a few batches to debug the training pipeline without fully training or saving a model. If this is `True`, further testing is skipped.
+
+```python
+logging.info("Starting the testing of the trained model on test set...")
+model.export('/flash/convAI/code/apiCode-21922/finalcode')
+```
+
+- **`model.export(path)`**: Exports the trained model in `.nemo` format for deployment or reuse.
+
+```python
+eval_model.update_data_dir_for_testing(data_dir=cfg.model.data_dir)
+eval_model.setup_test_data(test_data_config=cfg.model.test_ds)
+trainer.test(model=eval_model, ckpt_path=None, verbose=False)
+```
+
+- **`update_data_dir_for_testing`**: Updates the model's data directory to point to the testing dataset.
+- **`setup_test_data`**: Configures the test dataset based on `cfg.model.test_ds`.
+- **`trainer.test`**: Runs evaluation on the test dataset and logs metrics.
+
+---
+
+#### **7. Inference on Example Queries**
+```python
+queries = [
+    'set alarm for seven thirty am',
+    'lower volume by fifty percent',
+    'what is my schedule for tomorrow',
+]
+pred_intents, pred_slots = eval_model.predict_from_examples(queries, cfg.model.test_ds)
+```
+
+- **`predict_from_examples(queries, test_ds)`**: Runs inference on sample queries using the trained model.
+  - **`pred_intents`**: The predicted intent labels for each query.
+  - **`pred_slots`**: Token-level slot predictions.
+
+```python
+for query, intent, slots in zip(queries, pred_intents, pred_slots):
+    logging.info(f'Query : {query}')
+    logging.info(f'Predicted Intent: {intent}')
+    logging.info(f'Predicted Slots: {slots}')
+```
+
+- Logs the predictions for the queries, including both intent classification and slot tagging results.
+
+---
+
+#### **8. Entry Point**
+```python
+if __name__ == '__main__':
+    main()
+```
+
+- Ensures the script runs as a standalone program.
+
+---
+
+### **Workflow Summary**
+
+1. **Configuration Management**:
+   - Loads all settings (trainer, model, optimizer, data) from the Hydra YAML configuration file.
+
+2. **Training**:
+   - Fine-tunes a pretrained BERT model on the intent and slot classification dataset.
+
+3. **Evaluation**:
+   - Tests the trained model on a separate test dataset.
+   - Logs metrics and saves the trained model.
+
+4. **Inference**:
+   - Runs predictions on example queries and logs results.
+
+---
+
+### **Key Advantages**
+- **Separation of Configurations**: Cleanly decouples code and configuration, enabling easy experimentation.
+- **Ease of Use**: NeMo simplifies complex NLP workflows like dataset preprocessing, tokenization, and model creation.
+- **Scalability**: PyTorch Lightning's distributed training capabilities make this approach scalable across multiple GPUs or nodes.
+
+
+  --------------
+  test_data.py
+
+  
+This Python code reads a TSV (Tab-Separated Values) file and checks if each line has exactly two tab-separated values. Let's break it down:
+
+Code Breakdown
+1. File Path Setup
+python
+Copy code
+input_file = r"/flash/convAI/data/edistrict/13012022/train.tsv"
+input_file: Specifies the file path for the input file. The r before the string denotes a raw string literal, ensuring that backslashes (\) in the path are not treated as escape characters.
+2. Initializing an Array
+python
+Copy code
+arr_temp = []
+arr_temp: An empty list to store the lines read from the file.
+3. Reading the File
+python
+Copy code
+with open(input_file, 'r') as f:
+    print("****************************************************************")
+    arr_temp = f.readlines()
+with open(input_file, 'r'):
+
+Opens the file in read mode ('r').
+The with statement ensures the file is properly closed after reading, even if an error occurs.
+f.readlines():
+
+Reads all lines of the file into a list, where each line is an individual string.
+print("****************************************************************"):
+
+Prints a separator for visual clarity during program execution.
+arr_temp = f.readlines():
+
+Assigns the list of lines from the file to the variable arr_temp.
+4. Printing the Total Number of Lines
+python
+Copy code
+print(len(arr_temp))
+len(arr_temp):
+Counts the total number of lines in the file (number of elements in the arr_temp list).
+The result is printed to the console.
+5. Checking Line Validity
+python
+Copy code
+for a in arr_temp:
+    if len(a.split('\t')) != 2:
+        print(a)
+for a in arr_temp::
+
+Loops through each line (a) in the list of lines (arr_temp).
+a.split('\t'):
+
+Splits the line (a) into a list of values using the tab character ('\t') as the delimiter.
+if len(a.split('\t')) != 2::
+
+Checks if the number of values in the line is not equal to 2.
+This ensures that each line has exactly two tab-separated values (as expected for this file).
+print(a):
+
+Prints the lines that do not meet the condition (i.e., lines that do not have exactly two values).
+
+  ------
+  hparams.yaml
+
+  
+## Detailed Breakdown of the Configuration File
+
+The provided configuration file outlines parameters for a natural language processing (NLP) model, likely designed for intent recognition and slot filling tasks. 
+
+
+### ****General Settings
+
+- **nemo_path**: Set to `null`, indicating that no specific path to the Nemo framework is defined.
+  
+- **data_dir**: The directory where the dataset is stored, specified as `/flash/convAI/data/doris/25722`.
+
+### ****Class Labels
+
+- **class_labels**: This section contains paths to files that define the intent and slot labels for the model.
+  - **intent_labels_file**: Specifies the CSV file containing intent labels (`intent_labels.csv`).
+  - **slot_labels_file**: Specifies the CSV file containing slot labels (`slot_labels.csv`).
+
+- **class_balancing**: Set to `null`, suggesting no specific class balancing strategy is applied.
+
+- **intent_loss_weight**: A weight of `0.6` assigned to the intent loss, which may affect how losses are computed during training.
+
+- **pad_label**: Set to `-1`, indicating a label used for padding in sequences.
+
+- **ignore_extra_tokens**: Set to `false`, meaning extra tokens in sequences will not be ignored during processing.
+
+- **ignore_start_end**: Set to `true`, indicating that start and end tokens should be ignored in certain contexts.
+
+### ****Dataset Configuration
+
+#### Training Dataset
+
+- **train_ds**:
+  - **prefix**: `train`, indicating the dataset prefix.
+  - **batch_size**: `32`, defining how many samples are processed in one iteration.
+  - **shuffle**: `true`, meaning the training data will be shuffled before each epoch.
+  - **num_samples**: `-1`, indicating all samples should be used.
+  - **num_workers**: `2`, specifying two worker threads for data loading.
+  - **drop_last**: `false`, meaning if the last batch is smaller than the batch size, it will not be dropped.
+  - **pin_memory**: `false`, indicating that data loading does not use pinned memory.
+
+#### Validation Dataset
+
+- **validation_ds**:
+  - Similar structure as training dataset with:
+    - **prefix**: `test`
+    - **shuffle**: `false`
+
+#### Test Dataset
+
+- **test_ds**:
+  - Also mirrors validation dataset settings with:
+    - **prefix**: `test`
+    - **shuffle**: `false`
+
+### ****Tokenizer Configuration
+
+- **tokenizer**:
+  - **tokenizer_name**: Uses a pretrained BERT tokenizer (`bert-large-uncased`).
+  - **vocab_file**: Path to the vocabulary file required by the tokenizer.
+  - Other fields like `tokenizer_model` and `special_tokens` are set to `null`.
+
+### ****Language Model Configuration
+
+- **language_model**:
+  - **max_seq_length**: Maximum sequence length set to `50`.
+  - **pretrained_model_name**: Specifies the same BERT model as above (`bert-large-uncased`).
+  - Other fields such as `lm_checkpoint`, `config_file`, and `config` are all set to `null`.
+
+### ****Head Configuration
+
+- **head**:
+  - **num_output_layers**: Set to `2`, indicating two output layers in the model architecture.
+  - **fc_dropout**: Dropout rate of `0.1` applied in fully connected layers to prevent overfitting.
+
+### ****Optimizer Configuration
+
+- **optim**:
+  - **name**: Specifies using the Adam optimizer.
+  - **lr**: Learning rate set at $$2.0 \times 10^{-5}$$.
+  
+- **args**:
+  - Contains additional parameters including:
+    - **weight_decay**: Regularization parameter set at `0.01`.
+
+- **sched (Scheduler)**:
+  - Uses a warmup annealing schedule with parameters such as:
+    - Monitors validation loss (`val_loss`).
+    - Warmup ratio of `0.1`.
+
+### ****Data Description
+
+The data description section provides details about intent labels and their corresponding IDs:
+
+- A list of intent labels includes various actions related to property registration, such as "Circle rate," "WILL registration," and "Payment."
+
+- Each intent label has an associated ID, mapping them from names to numerical identifiers, which can be used during training for classification tasks.
+
+- The section also includes weights for each intent, which may help balance their contribution during training.
+
+This configuration sets up a robust framework for training an NLP model focused on understanding intents related to property registration processes, utilizing BERT as its backbone architecture. 
+     
+     
+
+  
