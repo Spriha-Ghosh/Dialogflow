@@ -1,2 +1,7 @@
 Select the part of the training phrase that you want to annotate.-->Select the desired entity type from the list.
 A parameter is created for you in the parameter table below. --> Click the Save button and wait until the Agent Training dialog indicates that training is complete.
+
+End User Expression(raw) --> Agent --> Intent Match(best intent in your agent) --> Intents( define many intents, where your combined intents can handle a complete conversation)-> 
+training phrase(example phrases, which dialogflow ML builds upon for similar phrases) actions(trigger certain actions defined in system.) 
+parameters(struvtured data with entity types) responses(text, speech, or visual) -->More complex intents; contexts(helps in more accurate intent matching) events(invoke an intent based on something that has happened, instead of what an end-user communicates.) 
+Copy Overwrite move -->destination agent
