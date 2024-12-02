@@ -60,10 +60,10 @@ Here are additional intent labels based on the vehicle and permit services you'v
 6. ContinueHypothecation  
 7. ApplyForNOC  
 8. CheckRCParticulars  
-9. RetainRegistrationNumber  
-10. UpdateHypothecationDetails  
+9. RetainRegistrationNumber  Y
+10. UpdateHypothecationDetails  Y
 11. RequestHypothecationRelease  
-12. TransferVehicleOwnershipInDeathCase  
+12. TransferVehicleOwnershipInDeathCase  (Y N)
 13. RequestTemporaryRC  
 14. UpdateVehicleOwnership  
 15. ViewVehicleRCStatus  
@@ -71,17 +71,17 @@ Here are additional intent labels based on the vehicle and permit services you'v
 17. ApplyForNOCForVehicleExport  
 18. RequestVehicleNoObjectionCertificate  
 19. ReportRCStatus  
-20. ChangeVehicleClassification
+20. ChangeVehicleClassification(Y)
 
 ### **Permit Services**
 21. ApplyForAITP  
-22. TransferPermit  
-23. TransferPermitInDeathCase  
+22. TransferPermit  (Y)
+23. TransferPermitInDeathCase(Y)  
 24. RenewPermit  
 25. RenewHomeAuthorization  
 26. ApplyForFreshPermit  
 27. RequestDuplicatePermit  
-28. SurrenderPermit  
+28. SurrenderPermit  (Y)
 29. ApplyForBharatNumber  
 30. RequestDMS  
 31. ApplyForRTOPermit  
