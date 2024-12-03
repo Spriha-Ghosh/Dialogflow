@@ -1,53 +1,140 @@
-1. RegisterNewVehicle  
-2. RenewVehicleRegistration  
-3. CheckRegistrationStatus  
-4. ApplyDrivingLicense  
-5. RenewDrivingLicense  
-6. CheckLicenseStatus  
-7. UpdateLicenseDetails  
-8. ViewTrafficFines  
-9. PayTrafficFines  
-10. ContestTrafficViolation  
-11. CheckRoadTaxDetails  
-12. PayRoadTax  
-13. RequestTaxExemption  
-14. ApplyVehiclePermit  
-15. RenewVehiclePermit  
-16. TrackPermitStatus  
-17. ReportTrafficViolation  
-18. FileAccidentReport  
-19. RequestTowingService  
-20. RequestPollutionCertificate  
-21. RenewPollutionCertificate  
-22. CheckPollutionCertificateStatus  
-23. ApplyVehicleFitnessTest  
-24. TrackFitnessTestStatus  
-25. ScheduleDrivingTest  
-26. CancelDrivingTest  
-27. CheckTestResults  
-28. RequestDuplicateRC  
-29. RequestDuplicateLicense  
-30. UpdateVehicleOwnership  
-31. ApplyForNOC  
-32. TrackNOCRequest  
-33. RequestVehicleInsurance  
-34. RenewVehicleInsurance  
-35. VerifyInsuranceDetails  
-36. CheckBlacklistStatus  
-37. ApplyForVehicleLoan  
-38. TrackLoanApplication  
-39. UpdateContactInformation  
-40. ChangePreferredRTO  
-41. RequestRoadsideAssistance  
-42. SubmitFeedback  
-43. LodgeComplaint  
-44. ViewComplaintStatus  
-45. RequestVehicleAuctionDetails  
-46. ApplyForVehicleScrapping  
-47. CheckScrappingStatus  
-48. RequestE-ChallanDetails  
-49. PayE-Challan  
-50. UpdateEmergencyContact  
+comprehensive dataset for  vehicle services portal:
+Here’s a categorized segregation of the provided instances based on their functional areas:
+ Data Entry, Insurance Details, Appointment Details, documents Upload & Fee payment.
+---
+
+### **1. Vehicle Registration and Ownership**  
+- Address_Change  
+- BH_Eligibility  
+- BH_Series  
+- Conversion  
+- Duplicate_RC  
+- Download_RC  
+- Fancy Number  
+- New_Registration  
+- RC_NOC  
+- RC_particulars  
+- RC_Redispatch  
+- RC_Surrender  
+- Regn_Certi  
+- Temp_Registration  
+- Transfer_of_Ownership  
+- Vehicle_Details  
+
+---
+
+### **2. Permits and Certifications**  
+- AITP  
+- Duplicate Permit  
+- Fresh_Permit  
+- National_permit  
+- Permit Renewal  
+- PUCC  
+- Trade Certificate  
+
+---
+
+### **3. Financial and Administrative Actions**  
+- Challan  
+- Fees  
+- Tax  
+
+---
+
+### **4. Hypothecation and Insurance**  
+- HP_addition  
+- HP_Continuation  
+- HP_termination  
+- Insurance  
+
+---
+
+### **5. Appointments and Status Tracking**  
+- Application_status  
+- Appointment  
+- Appointment_Receipt  
+- Pending_action  
+- Slot_enquiry  
+- service_type  
+
+---
+
+### **6. eServices and Documentation**  
+- DMS Upload  
+- Download_RC  
+- eKYC  
+- Forms  
+- Form_1  
+- Form_2  
+- prints_forms  
+
+---
+
+### **7. Specialized Processes**  
+- Alteration  
+- Dispose  
+- Homologation  
+- Faceless  
+- Faceless States  
+
+---
+
+### **8. Support and Helpdesk**  
+- Default Fallback Intent  
+- Default Welcome Intent  
+- Helpdesk  
+- NO_Record  
+- Query  
+
+---
+
+### **9. Miscellaneous Services**  
+- Dashboard  
+- Check_Post  
+- HSRP  
+- IDregister  
+- mobile_update  
+- Sarathi_DL  
+
+---
+
+### **10. End Chat Actions**  
+- ENDChat- no  
+- ENDChat- yes  
+
+---
+
+### **11. Other Processes**  
+- Edit  
+- Full_form  
+- Fancy Number  
+
+Let me know if further refinement is required!
+
+
+
+
+Transfer of ownership 
+Issue of Duplicate RC 
+Change of Address in RC 
+Hypothecation Addition
+Hypothecation Termination 
+Hypothecation Continuation
+No Objection Certificate 
+RC Particulars
+Retention of Registration No
+
+Permit Services
+AITP Permit
+Transfer of Permit
+Transfer of Permit in death case
+Renewal of Permit
+Renewal of Home Authorization
+Fresh Permit
+Duplicate Permit
+Surrender of Permit
+Bharat Number
+DMS RTO RC Tax PUCC
 
 Here are additional intent labels based on the vehicle and permit services you've mentioned:
 
@@ -60,10 +147,10 @@ Here are additional intent labels based on the vehicle and permit services you'v
 6. ContinueHypothecation  
 7. ApplyForNOC  
 8. CheckRCParticulars  
-9. RetainRegistrationNumber  Y
-10. UpdateHypothecationDetails  Y
+9. RetainRegistrationNumber  
+10. UpdateHypothecationDetails  
 11. RequestHypothecationRelease  
-12. TransferVehicleOwnershipInDeathCase  (Y N)
+12. TransferVehicleOwnershipInDeathCase  
 13. RequestTemporaryRC  
 14. UpdateVehicleOwnership  
 15. ViewVehicleRCStatus  
@@ -71,17 +158,17 @@ Here are additional intent labels based on the vehicle and permit services you'v
 17. ApplyForNOCForVehicleExport  
 18. RequestVehicleNoObjectionCertificate  
 19. ReportRCStatus  
-20. ChangeVehicleClassification(Y)
+20. ChangeVehicleClassification
 
 ### **Permit Services**
 21. ApplyForAITP  
-22. TransferPermit  (Y)
-23. TransferPermitInDeathCase(Y)  
+22. TransferPermit  
+23. TransferPermitInDeathCase  
 24. RenewPermit  
 25. RenewHomeAuthorization  
 26. ApplyForFreshPermit  
 27. RequestDuplicatePermit  
-28. SurrenderPermit  (Y)
+28. SurrenderPermit  
 29. ApplyForBharatNumber  
 30. RequestDMS  
 31. ApplyForRTOPermit  
@@ -117,5 +204,506 @@ Here are additional intent labels based on the vehicle and permit services you'v
 59. UpdateTaxDetails  
 60. RequestTaxCertificate  
 
+Certainly! Below is an extended list of intent labels based on the services provided:
 
+### **Vehicle Registration**
+1. RegisterNewVehicle  
+2. CheckRegistrationStatus  
+3. RenewRegistration  
+4. CancelRegistration  
+5. TransferOwnership  
+6. ApplyDuplicateRC  
+7. UpdateAddressInRegistration  
+8. TrackRegistrationApplication  
+9. ValidateRegistrationDetails  
+10. UpdateVehicleCategory  
+
+### **Permit**
+11. ApplyNationalPermit  
+12. RenewNationalPermit  
+13. ApplyInterstatePermit  
+14. RenewInterstatePermit  
+15. CancelPermit  
+16. TrackPermitStatus  
+17. VerifyPermitDetails  
+18. PayPermitFees  
+19. UpdatePermitDetails  
+
+### **Taxes**
+20. CalculateStateTax  
+21. PayStateTax  
+22. CheckTaxPaymentStatus  
+23. GenerateTaxReceipt  
+24. ApplyTaxExemption  
+25. ValidateTaxPayment  
+26. UpdateTaxDetails  
+
+### **Fitness**
+27. ApplyFitnessCertificate  
+28. RenewFitnessCertificate  
+29. ScheduleFitnessTest  
+30. RescheduleFitnessTest  
+31. TrackFitnessApplicationStatus  
+32. ValidateFitnessCertificate  
+33. GenerateFitnessCertificateReceipt  
+
+### **Enforcement**
+34. ViewChallanDetails  
+35. PayChallanOnline  
+36. ContestChallanPenalty  
+37. CheckPenaltyStatus  
+38. GenerateChallanReceipt  
+39. ReportViolationToAuthorities  
+
+### **National Permit Paid NR Services**
+40. ApplyNationalPermitPaidNR  
+41. RenewNationalPermitPaidNR  
+42. TrackNationalPermitNRApplication  
+43. PayNationalPermitNRFees  
+44. ValidateNationalPermitNRDetails  
+45. UpdateNationalPermitNR  
+
+### **Other Administrative Services**
+46. UpdateOwnerDetails  
+47. CheckOwnerHistory  
+48. ValidateVehicleDetails  
+49. RequestRTOOfficeDetails  
+50. TrackApplicationHistory  
+
+--------------------------------------------------------------------|
+
+Here's an expanded list of intent labels based on the given services, broken down further to accommodate a comprehensive dataset:
+
+---
+
+### **Vehicle Services**
+1. InitiateTransferOwnership  
+2. CheckTransferOwnershipStatus  
+3. RequestDuplicateRC  
+4. CheckDuplicateRCStatus  
+5. UpdateAddressInRC  
+6. VerifyUpdatedAddressInRC  
+7. AddHypothecationToRC  
+8. CheckHypothecationAdditionStatus  
+9. TerminateHypothecationInRC  
+10. VerifyHypothecationTermination  
+11. ContinueHypothecationInRC  
+12. TrackHypothecationContinuationStatus  
+13. ApplyForNoObjectionCertificate  
+14. TrackNOCApplicationStatus  
+15. ViewRCParticularsByRegistrationNumber  
+16. RetainVehicleRegistrationNumber  
+17. RequestRetentionApprovalStatus  
+
+---
+
+### **Permit Services**
+18. ApplyForAITPPermit  
+19. TrackAITPPermitApplicationStatus  
+20. TransferPermitOwnershipToAnotherParty  
+21. VerifyPermitOwnershipTransferDetails  
+22. InitiatePermitTransferOnDeathCase  
+23. TrackPermitTransferOnDeathStatus  
+24. ApplyPermitRenewal  
+25. TrackPermitRenewalStatus  
+26. RenewHomeAuthorizationForPermit  
+27. ApplyForFreshPermit  
+28. VerifyFreshPermitDetails  
+29. RequestDuplicatePermitCopy  
+30. TrackDuplicatePermitRequestStatus  
+31. SurrenderVehiclePermit  
+32. VerifyPermitSurrenderCompletion  
+33. ApplyForBharatNumberForVehicle  
+34. TrackBharatNumberApplicationStatus  
+35. EnquireDMSRCServicesDetails  
+36. RequestDMSRCTaxPaymentDetails  
+37. CheckDMSRCTaxPaymentStatus  
+38. RequestDMSPUCCVerification  
+39. TrackDMSPUCCRequestStatus  
+
+---
+
+### **General and Auxiliary Intents**
+40. CheckPermitEligibility  
+41. VerifyVehicleDetailsForService  
+42. GetEstimatedPermitFees  
+43. RetrievePendingPermitDetails  
+44. RequestAppointmentForPermitService  
+45. VerifyPermitDocumentRequirements  
+46. SubmitDocumentForRCUpdate  
+47. VerifyDocumentSubmissionStatus  
+48.   
+49. RequestAssistanceForPermitApplication  
+50. LocateNearestRTOForPermitService  
+
+------------------------------------------------------------------
+Here’s an extended and diverse set of intent labels to build a comprehensive dataset for your vehicle services portal:
+
+---
+
+### **Vehicle Services**
+1. CheckTransferOwnershipRequirements  
+2. SubmitOwnershipTransferDocuments  
+3. ConfirmOwnershipTransferCompletion  
+4. RequestVehicleHistoryReport  
+5. ValidateVehicleRegistrationCertificate  
+6. UpdateRCForOwnerDeceasedCase  
+7. RequestVehicleStatusCheck  
+8. AddSecondaryOwnerToRC  
+9. RemoveSecondaryOwnerFromRC  
+10. UpdateRCForCompanyOwnedVehicle  
+11. ApplyDuplicateRCOnline  
+12. ApplyDuplicateRCOffline  
+13. ReissueUpdatedRC  
+14. RequestRetentionOfVIPNumber  
+15. VerifyRetentionOfVIPNumberStatus  
+
+---
+
+### **Permit Services**
+16. RequestInterstatePermitDetails  
+17. VerifyAITPPermitFees  
+18. RenewAITPPermitOnline  
+19. RenewAITPPermitOffline  
+20. TransferAITPPermitToNewOwner  
+21. CheckEligibilityForHomeAuthorization  
+22. ValidatePermitForSpecificRoutes  
+23. RequestPermitDetailsByVehicleType  
+24. RequestPermitCancellationDetails  
+25. ApplyForSeasonalPermit  
+26. RequestCommercialPermitDetails  
+27. SubmitApplicationForGoodsPermit  
+28. TrackCommercialPermitRenewalStatus  
+29. ApplyTemporaryPermitForRelocation  
+30. RevokeExistingPermit  
+
+---
+
+### **Pollution and Compliance**
+31. CheckVehiclePUCCStatus  
+32. RequestDuplicatePUCCCertificate  
+33. ApplyForFreshPUCCCertificate  
+34. VerifyVehicleEmissionsForPUCC  
+35. UpdatePUCCDetailsAfterModification  
+36. ConfirmComplianceWithEmissionStandards  
+37. CheckPUCCValidityBeforeRenewal  
+
+---
+
+### **Tax and Payment Services**
+38. CalculateVehicleRoadTax  
+39. VerifyRoadTaxPaymentStatus  
+40. RequestRoadTaxRefundDetails  
+41. PayPendingRoadTaxOnline  
+42. ApplyForRoadTaxExemption  
+43. SubmitRoadTaxDocuments  
+44. ConfirmRoadTaxPaymentForRenewal  
+45. CalculateGreenTaxForVehicle  
+
+---
+
+### **Miscellaneous Services**
+46. UpdatePersonalInformationInRC  
+47. ApplyForVehicleInsuranceCertificate  
+48. ValidateInsurancePolicyDetails  
+49. VerifyFitnessCertificateValidity  
+50. ApplyForVehicleFitnessTest  
+51. TrackFitnessCertificateApplicationStatus  
+52. LocateRTOOfficeByPinCode  
+53. BookAppointmentAtRTOOffice  
+54. RequestOnlineRCVerification  
+
+---
+
+### **Advanced Intent Suggestions**
+55. RequestSupportForBulkPermitApplication  
+56. RequestStatusOfPendingApplications  
+57. ReportErrorInRCParticulars  
+58. SubmitFeedbackOnRTOServices  
+59. LodgeComplaintRegardingVehicleServices  
+60. CheckComplaintResolutionStatus  
+61. ApplyForVehicleReclassification (e.g., commercial to private)  
+62. SubmitApplicationForCustomVehicleModifications  
+63. RequestServiceHistoryDetails  
+
+---
+
+
+Here’s a long, expanded list of intent labels based on the provided instances, ensuring granularity and a variety of cases for your dataset:  
+
+---
+
+### **Vehicle Registration and Ownership**
+1. Address_Change_Request  y
+2. Check_BH_Eligibility  y
+3. Apply_BH_Series - register, criteria y
+4. Conversion_Private_To_Commercial y
+5. Conversion_Commercial_To_Private  y
+6. Request_Duplicate_RC  y
+7. Download_RC_Copy Y  
+8. Fancy_Number_Availability y 
+9. Fancy_Number_Reservation  y
+10. New_Registration_Request  y
+11. RC_NOC_Request  a
+12. Verify_RC_Particulars  y
+13. RC_Redispatch_Request y 
+14. RC_Surrender_Request  y
+15. Regn_Certi_Status  a
+16. Temp_Registration_Request y 
+17. Transfer_of_Ownership_Request  y
+18. Vehicle_Details_Enquiry  y
+19. RC_Update_Request  a
+20. Verify_Owner_Details  a
+
+---
+
+### **Permits and Certifications**
+21. Apply_AITP_Permit  y
+22. Request_Duplicate_Permit  y
+23. Apply_Fresh_Permit  y
+24. Renew_National_Permit - A permit is a document that allows a vehicle to travel across different regions of India, while a National Permit is a type of permit that allows a goods-carrying vehicle to travel across multiple states
+25. Permit_Renewal_Status  y
+26. Request_PUCC_Certificate  y
+27. Verify_PUCC_Validity  a
+28. Apply_Trade_Certificate  y
+29. Verify_Trade_Certificate a 
+30. Cancel_Trade_Certificate  a
+
+---
+
+### **Financial and Administrative Actions**
+31. Pay_Challan  y
+32. Check_Challan_Status  a
+33. Calculate_Fees  a
+34. Pay_Fees_Online - Please enter the Transaction name for which you want the fees Like : Transfer of Ownership, Hypothecation Addition, Duplicate RC, etc.. 
+35. Verify_Tax_Status  a
+36. Calculate_Tax_Due  a
+37. Pay_Road_Tax  a
+
+---
+
+### **Hypothecation and Insurance**
+38. Request_HP_Addition  y
+39. Check_HP_Addition_Status  a
+40. Apply_HP_Continuation y  
+41. Verify_HP_Continuation  a
+42. Request_HP_Termination  y
+43. HP_Termination_Status  a
+44. Check_Insurance_Policy_Status  a
+45. Update_Insurance_Details  a
+46. Renew_Insurance_Policy  
+
+---
+
+### **Appointments and Status Tracking**
+47. Check_Application_Status  a
+48. Book_Appointment  y
+49. Reschedule_Appointment  a
+50. Download_Appointment_Receipt   tbc 
+51. Check_Pending_Action   Y  
+52. Enquire_Slot_Availability N  
+53. Verify_Service_Type  Y
+54. Track_Application_Progress  Y
+
+---
+
+### **eServices and Documentation**
+55. DMS_Upload_Documents  y
+56. Download_RC_Document  y
+57. Verify_eKYC_Status  a
+58. Submit_eKYC_Details  a
+59. Enquire_Forms_Availability 1, 2 
+
+62. Print_Forms_Required - E receipt
+ 
+
+---
+
+### **Specialized Processes**
+64. Request_Alteration_Service - name vehicle number
+65. Dispose- cancel/withdraw actions 
+66. Homologation_Process  
+67. Apply_Faceless_Service - contactless services 
+68. Verify_Faceless_States_Eligibility  - list of services
+
+
+---
+
+### **Support and Helpdesk**
+70. Default_Fallback_Response  
+71. Default_Welcome_Message  
+72. Helpdesk_Support_Request  
+73. Handle_NO_Record_Error  
+74. User_Query_Response  
+75. Request_Feedback  
+
+---
+
+### **Miscellaneous Services**
+76. Access_User_Dashboard  
+77. Check_Post_Status  
+78. Apply_For_HSRP_Plate  -  High Security Number Plate 
+79. Verify_IDregister_Status  Y
+80. Update_Mobile_Number Y 
+81. Access_Sarathi_DL_Details Y 
+82. Download_DL_Copy  N
+83. View_RTO_Notifications  Y
+
+---
+
+### **End Chat Actions**
+84. EndChat_No_Response  
+85. EndChat_Yes_Response  
+
+---
+
+### **Other Processes**
+  
+89. Confirm_User_Identity  
+90. Submit_Correction_Request  
+
+---
+
+### **Vehicle Registration and Ownership Services (continued)**  
+4. **DuplicateRC_Request** - Apply for a duplicate Registration Certificate (RC).  
+5. **DuplicateRC_Status** - Track the status of a duplicate RC application.  
+6. **ChangeAddressInRC_Request** - Apply for a change of address in the RC.  
+7. **ChangeAddressInRC_Status** - Check the status of the address change request in the RC.  
+8. **ChangeAddressInRC_Requirements** - Enquire about the required documents for address change in RC.  
+9. **HypothecationAddition_Request** - Apply for adding a hypothecation to the RC.  
+10. **HypothecationAddition_Status** - Track the status of a hypothecation addition request.  
+11. **HypothecationTermination_Request** - Apply for terminating a hypothecation in the RC.  
+12. **HypothecationTermination_Status** - Check the status of a hypothecation termination request.  
+13. **HypothecationContinuation_Request** - Apply for continuing hypothecation on the RC.  
+14. **HypothecationContinuation_Status** - Track the status of hypothecation continuation.  
+15. **NoObjectionCertificate_Request** - Apply for a No Objection Certificate (NOC) for a vehicle.  
+16. **NoObjectionCertificate_Status** - Check the status of a NOC application.  
+17. **RCParticulars_Request** - Request the details of a vehicle's registration certificate.  
+18. **RetentionRegistrationNumber_Request** - Apply to retain a specific registration number.  
+19. **RetentionRegistrationNumber_Status** - Check the status of a registration number retention application.  
+
+---
+
+### **Permit Services**
+20. **AITPPermit_Request** - Apply for an All India Tourist Permit (AITP).  
+21. **AITPPermit_Status** - Track the status of an AITP application.  
+22. **TransferPermit_Request** - Apply for a transfer of a vehicle permit to another owner.  
+23. **TransferPermit_Status** - Check the status of a permit transfer application.  
+24. **TransferPermitInDeathCase_Request** - Apply for a transfer of permit ownership due to the owner's death.  
+25. **TransferPermitInDeathCase_Status** - Track the status of a permit transfer in death case.  
+26. **PermitRenewal_Request** - Apply for renewing a vehicle permit.  
+27. **PermitRenewal_Status** - Check the status of a permit renewal request.  
+28. **HomeAuthorizationRenewal_Request** - Apply for renewing home authorization for a vehicle permit.  
+29. **HomeAuthorizationRenewal_Status** - Track the status of a home authorization renewal request.  
+30. **FreshPermit_Request** - Apply for a fresh vehicle permit.  
+31. **FreshPermit_Status** - Track the status of a fresh permit application.  
+32. **DuplicatePermit_Request** - Apply for a duplicate vehicle permit.  
+33. **DuplicatePermit_Status** - Check the status of a duplicate permit request.  
+34. **PermitSurrender_Request** - Apply for surrendering a vehicle permit.  
+35. **PermitSurrender_Status** - Track the status of a permit surrender request.  
+36. **BharatNumber_Request** - Apply for a Bharat Series number for a vehicle.  
+37. **BharatNumber_Status** - Check the status of a Bharat Series number application.  
+
+---
+
+### **Financial and Documentation Services**  
+38. **DMSUploadDocuments_Request** - Upload required documents via the Document Management System (DMS).  
+39. **DMSUploadDocuments_Status** - Check the status of uploaded documents in the DMS.  
+40. **RTOEnquiry_Request** - Make an enquiry at the RTO about RC, tax, or PUCC.  
+41. **RCTaxPayment_Request** - Apply for paying road tax for a vehicle.  
+42. **RCTaxPayment_Status** - Check the status of a road tax payment.  
+43. **PUCC_Request** - Apply for a Pollution Under Control Certificate (PUCC).  
+44. **PUCC_Status** - Check the status or validity of a PUCC.  
+
+---
+
+Expanding further with additional intent labels tailored for an **e-Vehicle Portal Dataset**:  
+
+---
+
+### **Vehicle Registration and Ownership Services (Continued)**  
+45. **NewRegistrationEV_Request** - Apply for new registration of an electric vehicle (EV).  
+46. **NewRegistrationEV_Status** - Track the status of an EV registration application.  
+47. **ChangeBatteryOwnership_Request** - Request a change in ownership of an EV battery.  
+48. **UpdateBatteryDetailsInRC** - Update battery specifications in the RC for an EV.  
+49. **RCParticularsEV_Request** - Request particulars of an RC for an EV.  
+50. **RCUpdateForEVConversion** - Apply to update RC after converting a conventional vehicle to an EV.  
+
+---
+
+### **Permit Services (EV-Specific)**  
+51. **EVPermit_Request** - Apply for an EV-specific operating permit.  
+52. **EVPermitRenewal_Request** - Request renewal of an EV operating permit.  
+53. **EVChargingPermit_Request** - Apply for a permit to operate an EV charging station.  
+54. **EVChargingPermit_Status** - Track the status of an EV charging station permit.  
+55. **InterstatePermitEV_Request** - Request an interstate permit for an EV.  
+56. **EVFreightPermit_Request** - Apply for a freight permit for an electric goods vehicle.  
+
+---
+
+### **Charging and Battery Services**  
+57. **LocateChargingStations_Request** - Find nearby EV charging stations.  
+58. **BookChargingSlot_Request** - Book a charging slot at a specific station.  
+59. **TrackChargingSlotBooking_Status** - Check the status of a charging slot booking.  
+60. **BatterySwapping_Request** - Enquire about battery swapping options.  
+61. **BatterySwapping_Status** - Track the status of a battery swapping application.  
+62. **ChargingStationDetails_Request** - Request details of available facilities at a charging station.  
+63. **EVBatteryWarrantyDetails_Request** - Request details of EV battery warranty and terms.  
+64. **ChargingTariffEnquiry** - Enquire about the tariff at a charging station.  
+
+---
+
+### **Incentives and Subsidies**  
+65. **SubsidyEligibilityEV_Request** - Check eligibility for EV purchase subsidies.  
+66. **SubsidyApplicationEV_Request** - Apply for an EV subsidy.  
+67. **SubsidyApplicationEV_Status** - Track the status of an EV subsidy application.  
+68. **GreenTaxExemption_Request** - Apply for green tax exemption for an EV.  
+69. **ScrappageIncentive_Request** - Apply for a scrappage incentive for replacing an old vehicle with an EV.  
+
+---
+
+### **Hypothecation and Financial Services (EV-Specific)**  
+70. **EVLoanApplication_Request** - Apply for a loan for purchasing an EV.  
+71. **EVLoanStatus_Track** - Track the status of an EV loan application.  
+72. **EVHypothecationAddition_Request** - Request addition of hypothecation for an EV loan.  
+73. **EVHypothecationTermination_Request** - Apply for termination of hypothecation for an EV loan.  
+74. **EVInsuranceRenewal_Request** - Renew insurance for an EV.  
+75. **EVInsuranceClaim_Status** - Check the status of an EV insurance claim.  
+
+---
+
+### **Policy and Compliance**  
+76. **CheckEVPolicyDetails_Request** - Enquire about government policies for EVs.  
+77. **EVEmissionCompliance_Request** - Check if an EV complies with emission standards.  
+78. **EVRecallStatus_Check** - Enquire if a specific EV model has a recall notice.  
+79. **EVSafetyCertification_Request** - Apply for a safety certification for an EV.  
+
+---
+
+### **Miscellaneous EV Services**  
+80. **EVServiceCenterLocator_Request** - Find authorized EV service centers nearby.  
+81. **EVMaintenanceSchedule_Request** - Enquire about the maintenance schedule for an EV.  
+82. **EVSparePartsAvailability_Request** - Check the availability of EV-specific spare parts.  
+83. **EVRangeCalculator_Request** - Calculate the estimated range for a fully charged EV.  
+84. **EVPerformanceDetails_Request** - Enquire about the performance metrics of an EV.  
+85. **EVConversionKitApproval_Request** - Apply for approval of an EV conversion kit.  
+86. **EVAccidentHistory_Check** - Check accident history for a pre-owned EV.  
+
+---
+
+### **End-of-Life Services for EVs**  
+87. **EVBatteryRecycling_Request** - Request options for recycling an EV battery.  
+88. **EVScrapping_Request** - Apply for scrapping an end-of-life EV.  
+89. **EVEndOfLifeCertificate_Request** - Request an end-of-life certificate for an EV.  
+90. **BatteryReplacement_Request** - Request for EV battery replacement services.  
+
+---
+
+### **Support and Grievance**  
+91. **EVHelpdeskSupport_Request** - Request assistance for EV-related services.  
+92. **EVQueryResolution_Request** - Submit a query related to EV regulations or services.  
+93. **EVFeedbackSubmission_Request** - Submit feedback about EV services or portals.  
+94. **EVComplaintTracking_Status** - Track the status of an EV-related complaint.  
+
+---
 
