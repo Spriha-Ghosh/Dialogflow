@@ -1,0 +1,58 @@
+- https://www.geeksforgeeks.org/generative-ai-projects/
+- https://www.projectpro.io/article/llm-project-ideas/881
+- https://www.geeksforgeeks.org/top-natural-language-processing-nlp-projects/
+- https://medium.com/@gokulpalanisamy/list/rag-projects-8d0a3093c01c
+AI Foundation Models
+Content Library
+Customer Stories
+Deep Learning Blogs
+Developer Education
+Documentation
+Glossary
+GTC AI Conference
+Kaggle Grandmasters
+Professional Services
+Research
+Startups and VCs
+Technical Blog
+Technical Training
+Training for IT Professionals
+Trustworthy AI
+CUDA-X AI
+NGC Catalog
+Data Analytics
+Deep Learning SDKs
+Deep Learning Frameworks
+Conversational AI
+Recommender Systems
+Industry Frameworks
+
+- Applied Deep Learning Research- https://github.com/NVIDIA/ADLR
+- NVIDIA ACE samples, workflows, and resources- https://github.com/NVIDIA/ACE
+- Client side integration example source code and libraries for AI-Assisted Annotation SDK - https://github.com/NVIDIA/ai-assisted-annotation-client
+- AIStore: scalable storage for AI applications - https://github.com/NVIDIA/aistore
+- PyTorch implementation of Audio Flamingo: A Novel Audio Language Model with Few-Shot Learning and Dialogue Abilities. - https://github.com/NVIDIA/audio-flamingo
+- A service to convert audio to facial blendshapes for lipsyncing and facial performances. - https://github.com/NVIDIA/Audio2Face-3D-Samples
+- BioNeMo NIMs example notebooks: for optimized inference at scale-https://github.com/NVIDIA/bionemo-examples
+- BioNeMo Framework: For building and adapting AI models in drug discovery at scale- https://github.com/NVIDIA/bionemo-framework
+- Containerized testing of system components that impact AI workload performance - https://github.com/NVIDIA/Bobber
+- Caffe: a fast open framework for deep learning. https://github.com/NVIDIA/caffe
+- A developer reference project for creating Retrieval Augmented Generation (RAG) chatbots on Windows using TensorRT-LLM https://github.com/NVIDIA/ChatRTX
+- CUDA accelerated medical imaging algorithms https://github.com/NVIDIA/clara-ia    https://github.com/NVIDIA/clara-train-examples
+- A simple memory manager for CUDA designed to help Deep Learning frameworks manage memory  https://github.com/NVIDIA/cnmem
+- CUDA Python: Performance meets Productivity - https://github.com/NVIDIA/cuda-python
+- Samples for CUDA Developers which demonstrates features in CUDA Toolkit - https://github.com/NVIDIA/cuda-samples  https://github.com/NVIDIA/cuOpt-Resources
+- A GPU-accelerated library containing highly optimized building blocks and an execution engine for data processing to accelerate deep learning training and inference applications. https://github.com/NVIDIA/DALI
+- State-of-the-Art Deep Learning scripts organized by models - easy to train and deploy with reproducible accuracy and performance on enterprise-g https://github.com/NVIDIA/DeepLearningExamples
+- Deep learning for recommender systems https://github.com/NVIDIA/DeepRecommender
+- Optimized data input pipeline for deep learning frameworks https://github.com/NVIDIA/dlinput-tf
+- A logging tool for deep learning. https://github.com/NVIDIA/dllogger
+- Optimized data input pipeline for deep learning frameworks https://github.com/NVIDIA/dlinput-tf
+- Open-source deep-learning framework for exploring, building and deploying AI weather/climate workflows. https://github.com/NVIDIA/earth2studio
+- Transformer related optimization, including BERT, GPT https://github.com/NVIDIA/FasterTransformer
+- Flowtron is an auto-regressive flow-based generative network for text to speech synthesis with control over speech variation and style transfer https://github.com/NVIDIA/flowtron
+- A collection of open-source GPU accelerated Python tools and examples for quantitative analyst tasks and leverages RAPIDS AI project, Numba, cuDF, and Dask. https://github.com/NVIDIA/fsi-samples
+- Generative AI reference workflows optimized for accelerated infrastructure and microservice architecture. https://github.com/NVIDIA/GenerativeAIExamples
+- 
+
+
