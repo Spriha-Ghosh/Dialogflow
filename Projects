@@ -83,4 +83,5 @@ https://github.com/NVIDIA/NeMo-text-processing
 - tensorflow An Open Source Machine Learning Framework for Everyone | TensorRT NVIDIA® TensorRT™ is an SDK for high-performance deep learning inference on NVIDIA GPUs. This repository contains the open source components of TensorRT. | TensorRT-LLM TensorRT-LLM provides users with an easy-to-use Python API to define Large Language Models (LLMs) and build TensorRT engines that contain state-o
 - unsupervised-video-interpolation Unsupervised Video Interpolation using Cycle Consistency | UnsupervisedLandmarkLearning Implementation for the unsupervised latent landmark learning work from NVIDIA Applied Deep Learning Research
 - warp | A Python framework for high performance GPU simulation and graphics | waveglow A Flow-based Generative Network for Speech Synthesis
+- https://huggingface.co/learn/nlp-course/chapter1/1
  
